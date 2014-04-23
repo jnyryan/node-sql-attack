@@ -1,52 +1,79 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>John Ryans angularJS with nodejs kickstart</title>
+  <title>XSS Attacks with node-sqlserver | Johnny Ryan</title>
   <link rel="stylesheet" href="../styles/foundation.min.css">
+  <script src="http://foundation3.zurb.com/public/assets/marketing_docs.js"></script>
+  	<!-- Included CSS Files -->
+  <link rel="stylesheet" href="http://foundation3.zurb.com/stylesheets/zurb.topbar.css">
+	<link rel="stylesheet" href="http://foundation3.zurb.com/stylesheets/docs/footer.css">
+	<link rel="stylesheet" href="http://foundation3.zurb.com/stylesheets/docs/offcanvas.css">
+	<link rel="stylesheet" href="http://foundation3.zurb.com/stylesheets/docs/presentation.css">
 </head>
 <body>
 	<div class="top-bar">
 	<li class="name">
           <h1>
-            <a href="">angularJS with nodejs kickstart</a>
+            <a href="">XSS Attacks with node-sqlserver</a>
           </h1>
         </li>
 	</div>
 <br/>
+	<header id="header" class="row">
+	  <div class="twelve columns">
+	    <h1><a href="index.php">AdventureWorks Database</a></h1>
+	    <h4 class="subheader">The Vendor Filter is client side and the Products Search posts back to the server</h4> 
+	  </div>
+	</header>
+	<br />
 	<div class="row" ng-app="myApp">
     
-	<div class="large-6 columns">
-		<div ng-controller="TestStaticDataCtrl">
-		  <div class="panel">Search : <input type="text" ng-model="searchText"> </div>
+	<div class="large-3 columns">
+		<div ng-controller="VendorDataCtrl">
+		  <div class="panel">Filter Vendors : <input type="text" ng-model="searchText"> </div>
 		  
 		  <table class="panel" width=100%>
 			<thead>
 			<tr>
 			  <td>Name</td>
-			  <td>Year</td>
 			</tr>
 			</thead>
-			<tr ng-repeat="item in movieData.items | filter:searchText">
-			  <td>{{item.name}}</td>
-			  <td>{{item.year}}</td>
+			<tr ng-repeat="item in data | filter:searchText">
+			  <td>{{item.Name}}</td>
+
 			</tr>
 		  </table>
 		</div>
 	</div>
-	<div class="large-6 columns">
-		<div ng-controller="TestRestfulMovieDataCtrl">
-		  <div class="panel">Search : <input type="text" ng-model="search.$"> </div>
+	<div class="large-9 columns">
+		<div ng-controller="ProductDataCtrl">
+		  <div class="panel">Search : <input type="text" ng-model="search.$"> 
+		   <div class="row collapse">
+            <div class="ten mobile-three columns"><input type="text" placeholder="max price">
+              <input type="text" placeholder="size">
+            </div>
+            <div class="two mobile-one columns">
+              <a class="button expand postfix">Search</a>
+            </div>
+          </div>
+		  </div>
 		  
 		  <table class="panel" width=100%>
 			<thead>
 			<tr>
+			  <td>ProductID</td>
 			  <td>Name</td>
-			  <td>characters</td>
+			  <td>ProductNumber</td>
+			  <td>ListPrice</td>
+			  <td>Size</td>
 			</tr>
 			</thead>
-			<tr ng-repeat="item in movieData.cast | orderBy:'name' | limitTo:20 | filter:search">
-			  <td>{{item.name | lowercase}}</td>
-			  <td>{{item.characters.join()}}</td>
+			<tr ng-repeat="item in data | orderBy:'Name' | limitTo:20 | filter:search">
+			  <td>{{item.ProductID}}</td>
+			  <td>{{item.Name}}</td>
+			  <td>{{item.ProductNumber}}</td>
+			  <td>{{item.ListPrice}}</td>
+			  <td>{{item.Size}}</td>
 			</tr>
 		  </table>
 		</div>

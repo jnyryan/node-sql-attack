@@ -13,9 +13,9 @@ app.use(express.static(__dirname + '/public'));
 
 var config = {
     user: 'sa',
-    password: 'xxx',
+    password: 'Password1',
     server: 'localhost',
-    database: 'xxx'
+    database: 'AdventureWorks2012'
 }
 
 var commands = [
@@ -32,14 +32,28 @@ app.get('/', function(req, res) {
     res.sendfile('./public/views/index.html');
 });
 
-app.get('/data/:command', function(req, res) {
-	console.log("Executing : " + req.params.command);
+app.get('/vendor', function(req, res) {
+	console.log("Executing : vendor ");
+	var qry = "select * from Purchasing.Vendor";
 	var connection = new sql.Connection(config, function(err) {
 		var request = new sql.Request(connection); 
-		request.query(commands[req.params.command], function(err, recordset)
+		request.query(qry, function(err, recordset)
 		{
 			res.json(recordset);
-			console.dir(recordset);
+		});
+	});
+});
+
+app.get('/product/:maxprice/:size', function(req, res) {
+	console.log("Executing : " + req.params.maxprice, req.params.size);
+	var qry = "select ProductID,Name,ProductNumber,ListPrice,Size from Production.Product where ListPrice < " 
+	+ req.params.maxprice 
+	+ " and Size = '" + req.params.size + "'" ;
+	var connection = new sql.Connection(config, function(err) {
+		var request = new sql.Request(connection); 
+		request.query(qry, function(err, recordset)
+		{
+			res.json(recordset);
 		});
 	});
 });

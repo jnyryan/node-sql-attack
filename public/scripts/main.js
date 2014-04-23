@@ -1,25 +1,18 @@
 var myApp = angular.module('myApp', []);
 
-// Create some test data in a service
-myApp.factory('MovieData', function(){
-  console.log("Getting data from angular service.");
-  var MovieData = {};
-  MovieData.items = [
-    { name: "Monsters Inc 2", year: "2013" },
-    { name: "Star Wars", year: "1977" },
-    { name: "Toy Story", year: "1977" },   
-  ]
-  return MovieData;
-})
-
-function TestStaticDataCtrl($scope, MovieData){
-  $scope.movieData = MovieData;
+function VendorDataCtrl($scope, $http){
+  console.log("Retrieving vendor from rest api"); 
+  $http.get('/vendor')
+       .then(function(res){
+          $scope.data = res.data;                
+        });
 }
 
-function TestRestfulMovieDataCtrl($scope, $http){
-  console.log("Retrieving data from rest api"); 
-  $http.get('/data')
+function ProductDataCtrl($scope, $http){
+  console.log("Retrieving Product data from rest api"); 
+  
+  $http.get('/Product/3000/60')
        .then(function(res){
-          $scope.movieData = res.data;                
+          $scope.data = res.data;                
         });
 }

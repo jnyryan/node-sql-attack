@@ -1,4 +1,4 @@
-nodejs-sqlserver-quickstart
+nodejs-sqlserver-attack
 ==============
 
 a demo of using nodejs and SQL Server together
