@@ -13,9 +13,9 @@ app.use(express.static(__dirname + '/public'));
 
 var config = {
     user: 'sa',
-    password: 'Glgroup123',
+    password: 'xxx',
     server: 'localhost',
-    database: 'GLGLIVE'
+    database: 'xxx'
 }
 
 var commands = [

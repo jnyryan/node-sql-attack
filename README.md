@@ -13,3 +13,4 @@ Open the Surface Area Configuration Manager.  Go to the features section.  Make 
 
 http://colesec.inventedtheinternet.com/hacking-sql-server-with-xp_cmdshell/
 
+https://www.npmjs.org/package/mssql
